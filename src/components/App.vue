@@ -13,12 +13,12 @@
         </v-list-tile>
       </v-list>
       <v-container>
-      <v-text-field
-      label="Item Name"
-      v-model="Item.name"
-      @keyup.enter="addItem()"
-      ></v-text-field>
-      <v-btn @click="addItem()">Add Item</v-btn>
+        <v-text-field
+        label="Item Name"
+        v-model="Item.name"
+        @keyup.enter="addItem()"
+        ></v-text-field>
+        <v-btn @click="addItem()">Add Item</v-btn>
       </v-container>
     </v-card>
     <div class="overlay" v-if="!ready">

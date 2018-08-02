@@ -186,9 +186,6 @@ export default {
     },
     clear () {
       this.$refs.form.reset();
-    },
-    newHadj () {
-      //this.$store.state.firestore.collection("hadjjes")
     }
   }
 };
