@@ -36,9 +36,9 @@
           </v-list-tile>
         </v-list>
       </v-navigation-drawer>
-      <v-toolbar app >
+      <v-toolbar app  color="teal darken-1">
         <v-toolbar-side-icon @click.native="drawer = !drawer" v-if="$auth.user()"></v-toolbar-side-icon>
-        <v-toolbar-title>Hadjj tracking</v-toolbar-title>
+        <v-toolbar-title><img src="./../assets/img/LogoFinal.png"  style="max-width: 100px; max-height: 100px; margin-left:130px;margin-top:60px" alt=""></v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn flat @click="RoutesUtils.docs()">Docs</v-btn>
@@ -52,7 +52,7 @@
           <router-view></router-view>
         </v-container>
       </v-content>
-      <v-footer app>
+      <v-footer app color="teal darken-1">
         <span>&copy; 2018</span>
         <v-spacer></v-spacer>
       </v-footer>
