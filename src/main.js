@@ -13,8 +13,15 @@ import store from './../storage/store'
 import VueFire from 'vuefire'
 import Myfirebase from './../framework/dist/myfirebase'
 import Firestore from './../vue-firestore/dist/vue-firestore'
-
+import * as VueGoogleMaps from "vue2-google-maps";
 import Vuetify from 'vuetify'
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "AIzaSyDPQ98zjnGIyERYQ5BuZ_j7RamT0E6XWkA",
+    libraries: "places"
+  }
+});
 
 Vue.use(Vuetify)
 
