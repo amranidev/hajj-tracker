@@ -36,9 +36,9 @@
           </v-list-tile>
         </v-list>
       </v-navigation-drawer>
-      <v-toolbar app>
+      <v-toolbar app color="teal darken-1">
         <v-toolbar-side-icon @click.native="drawer = !drawer" v-if="$auth.user()"></v-toolbar-side-icon>
-        <v-toolbar-title>Hajj Tracker</v-toolbar-title>
+        <v-toolbar-title><img src="./../assets/img/LogoFinal.png" style="max-height:100px; max-width:100px;margin-left:100px; margin-top:60px" alt=""></v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn flat v-if="$auth.user()" @click="logout()">SignOut</v-btn>
