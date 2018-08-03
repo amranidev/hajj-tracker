@@ -137,7 +137,13 @@ export default {
             return el.user == this.$auth.user().uid
         })
 
-        console.log(my)
+        this.$store.state.firestore
+                .collection("teams/uas2NdgAHHtz0a8tGTe1/hadjjs/" + my[0]['.key'])
+                .update({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                })
+        
 
     });
     },

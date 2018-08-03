@@ -1,10 +1,8 @@
 .DS_Store
 node_modules/
-vue-firestore/
 myfirebase-cli/
 dist/
 docs/
-framework/
 public/static/
 public/index.html
 functions/node_modules/
