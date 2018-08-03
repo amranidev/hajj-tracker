@@ -1,4 +1,4 @@
-import { FirestoreModel } from './../../framework/dist/myfirebase'
+import { FirestoreModel } from 'myfirebase'
  
 class Team extends FirestoreModel {
     

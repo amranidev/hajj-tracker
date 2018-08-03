@@ -50,7 +50,7 @@
           <router-view></router-view>
         </v-container>
       </v-content>
-      <v-footer app>
+      <v-footer app color="teal darken-1">
         <span>&copy; 2018</span>
         <v-spacer></v-spacer>
       </v-footer>
