@@ -1,39 +1,5 @@
 <template>
     <v-container>
-      <v-text-field
-      label="Create new Group"
-      append-icon="add"
-      v-model="Team.name"
-      @keyup.enter="createGroup()"
-      ></v-text-field>
-    <div>
-      <v-text-field
-      label="Search"
-      append-icon="search"
-      v-model="searchInput"
-      @keyup.enter="search()"
-      ></v-text-field>
-        <div v-for="(haj, index) in output" :key="index">
-            <v-subheader>
-                {{ haj.email }}
-                -
-                <v-icon color="black" @click="add(haj['.key'])">add</v-icon>
-            </v-subheader>
-        </div>
-    </div>
-      <v-card>
-      <v-list two-line subheader>
-        <v-subheader>Items</v-subheader>
-        <v-list-tile v-for="(item, index) in positions" :key="index">
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-          </v-list-tile-content>
-          <v-list-tile-action>
-            <v-icon color="black">delete</v-icon>
-          </v-list-tile-action>
-        </v-list-tile>
-      </v-list>
-    </v-card>
   <div>
     <br>
     <gmap-map
@@ -50,6 +16,7 @@
       ></gmap-marker>
     </gmap-map>
   </div> 
+    <v-btn @click="addPoint()">Add point</v-btn>    
 </v-container>
 </template>
 <script>
@@ -64,9 +31,9 @@ export default {
      })
         
     this.geolocate()
-     
-     this.$binding("positions", this.$store.state.firestore.collection("/teams/uas2NdgAHHtz0a8tGTe1/hadjjs"))
-                .then((el) => {
+     setTimeout(()=> {
+        this.$binding("positions", this.$store.state.firestore.collection("/teams/uas2NdgAHHtz0a8tGTe1/hadjjs"))
+                    .then((el) => {
                     el.forEach((el) => {
                         const marker = {
                             lat: el.lat,
@@ -76,7 +43,12 @@ export default {
                         this.places.push(this.currentPlace);
                         this.center = marker;
                     })
-                })
+        })
+        console.log("updated")
+     }, 5000)
+   },
+   updated() {
+
    },
   data () {
     return {
@@ -96,6 +68,11 @@ export default {
   firestore () {
       return { 
           myPosition: this.$store.state.firestore.collection("teams/uas2NdgAHHtz0a8tGTe1/hadjjs")
+      }
+  },
+  firebase() {
+      return {
+          point: this.$store.state.database.child('point')
       }
   },
   methods : {
@@ -137,12 +114,16 @@ export default {
             return el.user == this.$auth.user().uid
         })
 
-        this.$store.state.firestore
-                .collection("teams/uas2NdgAHHtz0a8tGTe1/hadjjs/" + my[0]['.key'])
+        setTimeout(() => {
+            this.$store.state.firestore
+                .doc("teams/uas2NdgAHHtz0a8tGTe1/hadjjs/" + my[0]['.key'])
                 .update({
                     lat: position.coords.latitude,
-                    lng: position.coords.longitude
+                    lng: position.coords.longitude,
+                    name: this.$auth.user().displayName,
+                    user: this.$auth.user().uid
                 })
+        }, 5000)
         
 
     });
@@ -152,7 +133,6 @@ export default {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng(),
-          color: "white"
         }
 
         this.markers.push({ position: marker });
@@ -164,11 +144,14 @@ export default {
     setPlace (place) {
         this.currentPlace = place;
     },
-    test() {
+    test () {
         console.log(this.positions)
     },
-    check() {
-
+    addPoint () {
+        this.$firebaseRefs.point.update({
+            lat: "a",
+            lng: "a"
+        })
     }
   }
 };

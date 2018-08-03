@@ -14,19 +14,19 @@
           </v-list>
         </v-toolbar>
         <v-list>
-          <v-list-tile @click="$router.push('/realtime-database')">
+          <v-list-tile @click="$router.push('/')">
             <v-list-tile-content>
-              <v-list-tile-title>Realtime database</v-list-tile-title>
+              <v-list-tile-title>Home</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile @click="$router.push('/firestore')">
+          <v-list-tile @click="$router.push('/group')">
             <v-list-tile-content>
-              <v-list-tile-title>Cloud firestore</v-list-tile-title>
+              <v-list-tile-title>Create Group</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile @click="$router.push('/profile')">
+          <v-list-tile @click="$router.push('/messages')">
             <v-list-tile-content>
-              <v-list-tile-title>Update profile</v-list-tile-title>
+              <v-list-tile-title>Messages</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
           <v-list-tile @click="logout()">
@@ -36,13 +36,11 @@
           </v-list-tile>
         </v-list>
       </v-navigation-drawer>
-      <v-toolbar app >
+      <v-toolbar app>
         <v-toolbar-side-icon @click.native="drawer = !drawer" v-if="$auth.user()"></v-toolbar-side-icon>
-        <v-toolbar-title>Hadjj tracking</v-toolbar-title>
+        <v-toolbar-title>Hajj Tracker</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-          <v-btn flat @click="RoutesUtils.docs()">Docs</v-btn>
-          <v-btn flat @click="RoutesUtils.github()">Github</v-btn>
           <v-btn flat v-if="$auth.user()" @click="logout()">SignOut</v-btn>
           <v-btn flat v-else @click="login()">Login</v-btn>
         </v-toolbar-items>

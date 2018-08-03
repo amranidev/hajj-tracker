@@ -7,6 +7,8 @@ import UpdateProfile from '@/components/auth/UpdateProfile'
 import App from '@/components/App'
 import NotFound from '@/components/errors/404'
 import Firestore from '@/components/Firestore'
+import Messages from '@/components/Messages'
+import Group from '@/components/Group'
 
 import Vue from 'vue'
 
@@ -51,6 +53,22 @@ const routes = [{
             path: '/profile',
             component: Profile,
             name: 'Update Profile',
+            meta : {
+                auth: true
+            }
+        },
+        {
+            path: '/group',
+            component: Group,
+            name: 'messages',
+            meta : {
+                auth: true
+            }
+        },
+        {
+            path: '/messages',
+            component: Messages,
+            name: 'messages',
             meta : {
                 auth: true
             }

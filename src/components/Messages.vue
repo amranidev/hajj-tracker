@@ -2,10 +2,13 @@
   <div>
     <v-card>
       <v-list two-line subheader>
-        <v-subheader>Items</v-subheader>
+        <v-subheader>Messages</v-subheader>
         <v-list-tile v-for="(item, index) in data" :key="index">
+            <v-list-tile-avatar>
+                <img :src="item.photoURL">
+              </v-list-tile-avatar>
           <v-list-tile-content>
-            <v-list-tile-title>{{item.name}}</v-list-tile-title>
+            <v-list-tile-title>{{item.message}} - <i>{{item.name}}</i> </v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
             <v-icon color="black" @click="deleteItem(item['.key'])">delete</v-icon>
@@ -14,11 +17,11 @@
       </v-list>
       <v-container>
         <v-text-field
-        label="Item Name"
-        v-model="Item.name"
+        label="Write Message..."
+        v-model="Item.message"
         @keyup.enter="addItem()"
         ></v-text-field>
-        <v-btn @click="addItem()">Add Item</v-btn>
+        <v-btn @click="addItem()">Send</v-btn>
       </v-container>
     </v-card>
     <div class="overlay" v-if="!ready">
@@ -36,7 +39,9 @@ import Item from "@/models/Item";
 export default {
   mounted () {
     this.$auth.check()
-    .then(user => { })
+    .then(user => {
+        this.user = user
+     })
     .catch(err => {
       console.log(err)
     })
@@ -60,9 +65,11 @@ export default {
   },
   methods: {
     addItem () {
-      this.$firebaseRefs.data.onDisconnect().cancel()
+      //this.$firebaseRefs.messages.onDisconnect().cancel()
+      this.Item.photoURL = this.$auth.user().photoURL
+      this.Item.name = this.user.displayName
       this.Item.push()
-      this.Item.name = ""
+      this.Item.message = ""
     },
     deleteItem (key) {
       this.Item.remove(key);
